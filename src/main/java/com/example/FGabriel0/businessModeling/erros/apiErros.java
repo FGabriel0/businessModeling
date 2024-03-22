@@ -15,6 +15,10 @@ public class apiErros {
 		this.errors = Arrays.asList(msgError);
 	}
 	
+	public apiErros(List<String> errors) {
+		this.errors = errors;
+	}
+	
 	
 	
 }

@@ -2,6 +2,7 @@ package com.example.FGabriel0.businessModeling.entity;
 
 import java.util.Set;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -12,13 +13,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table( name = "cliente" )
@@ -33,9 +31,11 @@ public class Cliente {
     private Integer id;
 
     @Column(name = "nome", length = 100)
+    @NotEmpty(message = "Campo nome é Obrigatório")//Verificar se ela esta vázia ou null e lança um erro
     private String nome;
     
     @Column(name = "cpf")
+    @NotEmpty(message = "Campo Cpf é Obrigatório")
     private String cpf;
 
     @JsonIgnore

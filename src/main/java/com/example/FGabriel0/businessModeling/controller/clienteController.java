@@ -16,6 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.FGabriel0.businessModeling.entity.Cliente;
 import com.example.FGabriel0.businessModeling.repository.clienteRepository;
 
+import jakarta.validation.Valid;
+
 @RestController // Annotation que especializada de controller
 @RequestMapping("/api/clientes")
 public class clienteController {
@@ -37,7 +39,7 @@ public class clienteController {
 
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente salvaCliente(@RequestBody Cliente cliente) {
+	public Cliente salvaCliente(@RequestBody  @Valid Cliente cliente) {
 		return repository.save(cliente);
 	}
 	
