@@ -26,6 +26,8 @@ import com.example.FGabriel0.businessModeling.enums.statusPedido;
 import com.example.FGabriel0.businessModeling.exception.RegraNegocioException;
 import com.example.FGabriel0.businessModeling.service.pedidoService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/pedido")
@@ -39,7 +41,7 @@ public class pedidoController {
 		
 		@PostMapping
 		@ResponseStatus(HttpStatus.CREATED)
-		public Integer save(@RequestBody pedidoDTO dto) {
+		public Integer save(@RequestBody @Valid pedidoDTO dto) {
 			Pedido pedido = service.salvar(dto);
 			return pedido.getId();
 		}
@@ -56,7 +58,7 @@ public class pedidoController {
 		@PatchMapping("/{id}")
 		@ResponseStatus(HttpStatus.NO_CONTENT)
 		public void updateStatus(@PathVariable Integer id
-								,@RequestBody updateStatusPedidoDTO dto) {
+								,@RequestBody @Valid updateStatusPedidoDTO dto) {
 			String novoStatus = dto.getNovoStatus();
 			service.atualizarStatus(id, statusPedido.valueOf(novoStatus));
 		}
@@ -66,6 +68,7 @@ public class pedidoController {
 				.codigo(pedido.getId())
 				.dataPedido(pedido.getDataPedido().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
 				.nomeCliente(pedido.getCliente().getNome())
+				.cpf(pedido.getCliente().getCpf())
 				.total(pedido.getTotal())
 				.status(pedido.getStatus().name())
 				.item(converter(pedido.getItens()))

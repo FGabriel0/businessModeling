@@ -2,6 +2,7 @@ package com.example.FGabriel0.businessModeling.entity;
 
 import java.util.Set;
 
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,11 +32,12 @@ public class Cliente {
     private Integer id;
 
     @Column(name = "nome", length = 100)
-    @NotEmpty(message = "Campo nome é Obrigatório")//Verificar se ela esta vázia ou null e lança um erro
+    @NotEmpty(message = "{campo.nome.obrigatorio}")//Verificar se ela esta vázia ou null e lança um erro
     private String nome;
     
     @Column(name = "cpf")
-    @NotEmpty(message = "Campo Cpf é Obrigatório")
+    @NotEmpty(message = "{campo.cpf.obrigatorio}")
+    @CPF(message = "{campo.cpf.invalido}")
     private String cpf;
 
     @JsonIgnore

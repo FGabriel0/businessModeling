@@ -19,6 +19,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.FGabriel0.businessModeling.entity.Produto;
 import com.example.FGabriel0.businessModeling.repository.produtoRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/produto")
 public class produtoController {
@@ -39,7 +41,7 @@ public class produtoController {
 		
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Produto salvaProduto(@RequestBody Produto produto) {
+	public Produto salvaProduto(@RequestBody @Valid Produto produto) {
 		return repository.save(produto);
 	}
 	
@@ -56,7 +58,7 @@ public class produtoController {
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateProduto(@PathVariable Integer id, @RequestBody Produto produto) {
+	public void updateProduto(@PathVariable Integer id, @RequestBody @Valid Produto produto) {
 		repository.findById(id)
 		.map(update -> {
 			produto.setId(update.getId());
