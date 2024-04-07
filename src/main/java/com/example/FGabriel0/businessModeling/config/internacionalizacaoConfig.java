@@ -18,7 +18,7 @@ public class internacionalizacaoConfig {
 	        messageSource.setDefaultEncoding("ISO-8859-1");
 	        messageSource.setDefaultLocale(Locale.getDefault());
 	        return messageSource;
-	    }
+	    } 
 
 	    @Bean
 	    public LocalValidatorFactoryBean validatorFactoryBean(){

@@ -7,6 +7,7 @@ import com.example.FGabriel0.businessModeling.entity.Cliente;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public interface clienteRepository extends JpaRepository<Cliente, Integer>{
 	@Query(value = " select * from cliente c where c.nome like '%:nome%' ", nativeQuery = true)
@@ -20,4 +21,6 @@ public interface clienteRepository extends JpaRepository<Cliente, Integer>{
 
     @Query(" select c from Cliente c left join fetch c.pedidos where c.id = :id  ")
     Cliente findClienteFetchPedidos( @Param("id") Integer id );
+    
+    UserDetails findByNome(String nome);
 }

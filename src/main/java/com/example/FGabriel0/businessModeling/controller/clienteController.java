@@ -1,6 +1,10 @@
 package com.example.FGabriel0.businessModeling.controller;
 
 
+import java.util.List;
+
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.FGabriel0.businessModeling.entity.Cliente;
+import com.example.FGabriel0.businessModeling.entity.Produto;
 import com.example.FGabriel0.businessModeling.repository.clienteRepository;
 
 import jakarta.validation.Valid;
@@ -68,6 +73,17 @@ public class clienteController {
 			repository.save(cliente);
 			return update;
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
+	
+	@GetMapping
+	public List<Cliente> find(Cliente filtro){
+		ExampleMatcher matcher = ExampleMatcher
+				.matching()
+				.withIgnoreCase()
+				.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+		
+		Example example = Example.of(filtro, matcher);
+		return repository.findAll(example);
 	}
 
 }

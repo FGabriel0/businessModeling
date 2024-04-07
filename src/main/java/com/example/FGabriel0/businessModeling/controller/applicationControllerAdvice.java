@@ -24,11 +24,6 @@ public class applicationControllerAdvice {
 		return new apiErros(mensagemError);
 	}
 	
-	@ExceptionHandler(PedidoNaoEncontradoException.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public apiErros handlerPedidoNotFoundException(PedidoNaoEncontradoException ex) {
-		return new apiErros(ex.getMessage());
-	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
