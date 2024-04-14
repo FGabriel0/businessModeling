@@ -29,7 +29,7 @@ import com.example.FGabriel0.businessModeling.enums.statusPedido;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 

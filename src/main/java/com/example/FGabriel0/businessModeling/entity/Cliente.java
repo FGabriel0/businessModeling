@@ -35,7 +35,7 @@ public class Cliente{
 
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -51,8 +51,6 @@ public class Cliente{
     @Column(name = "password")
     private String password;
     
-    @Column(name = "role")
-    private UserRole role;
 
     @JsonIgnore
     @OneToMany( mappedBy = "cliente" , fetch = FetchType.LAZY )

@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Produto {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 
@@ -33,7 +33,5 @@ public class Produto {
 	@Column(name = "preco_unitario")
 	@NotNull(message = "{campo.preco.obrigatorio}")
 	private BigDecimal preco;
-
-
 
 }
