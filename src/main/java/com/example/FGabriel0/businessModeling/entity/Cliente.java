@@ -1,13 +1,10 @@
 package com.example.FGabriel0.businessModeling.entity;
 
-import java.util.Collection;
-import java.util.List;
+
 import java.util.Set;
 
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import com.example.FGabriel0.businessModeling.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,9 +31,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Cliente implements UserDetails {
+public class Cliente{
 
-	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,7 +40,7 @@ public class Cliente implements UserDetails {
     private Integer id;
 
     @Column(name = "nome", length = 100)
-    @NotEmpty(message = "{campo.nome.obrigatorio}")//Verificar se ela esta vázia ou null e lança um erro
+    @NotEmpty(message = "{campo.nome.obrigatorio}")
     private String nome;
     
     @Column(name = "cpf")
@@ -56,52 +52,17 @@ public class Cliente implements UserDetails {
     private String password;
     
     @Column(name = "role")
-    private String role;
+    private UserRole role;
 
     @JsonIgnore
     @OneToMany( mappedBy = "cliente" , fetch = FetchType.LAZY )
     private Set<Pedido> pedidos;
     
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role.equals(UserRole.ADMIN)) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
+    
+    
+  
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public String getUsername() {
-		return nome;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
 
 
 }

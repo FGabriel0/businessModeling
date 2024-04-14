@@ -1,4 +1,4 @@
-package com.example.FGabriel0.businessModeling.dto;
+package com.example.FGabriel0.businessModeling.controller.form;
 
 
 
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class itemPedidoDTO {
+public class itemPedidoForm {
 	
 	private Integer produto;
 	private Integer quantidade;

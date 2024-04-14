@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.FGabriel0.businessModeling.controller.form.pedidoForm;
 import com.example.FGabriel0.businessModeling.dto.inforItemPedidoDTO;
 import com.example.FGabriel0.businessModeling.dto.inforPedidoDTO;
-import com.example.FGabriel0.businessModeling.dto.pedidoDTO;
 import com.example.FGabriel0.businessModeling.dto.updateStatusPedidoDTO;
 import com.example.FGabriel0.businessModeling.entity.ItemPedido;
 import com.example.FGabriel0.businessModeling.entity.Pedido;
@@ -41,7 +41,7 @@ public class pedidoController {
 		
 		@PostMapping
 		@ResponseStatus(HttpStatus.CREATED)
-		public Integer save(@RequestBody @Valid pedidoDTO dto) {
+		public Integer save(@RequestBody @Valid pedidoForm dto) {
 			Pedido pedido = service.salvar(dto);
 			return pedido.getId();
 		}

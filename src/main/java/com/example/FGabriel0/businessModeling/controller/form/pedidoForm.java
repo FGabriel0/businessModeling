@@ -1,4 +1,4 @@
-package com.example.FGabriel0.businessModeling.dto;
+package com.example.FGabriel0.businessModeling.controller.form;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class pedidoDTO {
+public class pedidoForm {
 	
 	@NotNull(message = "{campo.codigo-cliente.obrigatorio}")
 	private Integer cliente;
@@ -24,5 +24,5 @@ public class pedidoDTO {
 	private BigDecimal total;
 	
 	@NotEmptyList(message = "{campo.items-pedido.obrigatorio}")
-	private List<itemPedidoDTO> itens;
+	private List<itemPedidoForm> itens;
 }

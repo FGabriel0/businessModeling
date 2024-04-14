@@ -1,4 +1,4 @@
-package com.example.FGabriel0.businessModeling.infra;
+package com.example.FGabriel0.businessModeling.infra.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,11 @@ public class securityConfig {
 				.authorizeHttpRequests(authorize -> authorize			
 						.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 						.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-						.requestMatchers(HttpMethod.POST, "/api/product").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.POST, "/api/produto").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.PUT,"/api/produto").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.DELETE, "/api/produto").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.POST, "/api/clientes").permitAll()
+						
 				.anyRequest().authenticated()
 				)
 				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)

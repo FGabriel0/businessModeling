@@ -42,7 +42,7 @@ public class clienteController {
 
 	}
 
-	@PostMapping("/salvar")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente salvaCliente(@RequestBody  @Valid Cliente cliente) {
 		return repository.save(cliente);

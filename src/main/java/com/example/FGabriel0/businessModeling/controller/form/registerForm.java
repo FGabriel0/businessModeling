@@ -1,4 +1,6 @@
-package com.example.FGabriel0.businessModeling.dto;
+package com.example.FGabriel0.businessModeling.controller.form;
+
+import com.example.FGabriel0.businessModeling.enums.UserRole;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class registerDTO {
+public class registerForm {
 
 	private String nome;
-	private String cpf;
 	private String password;
-	private String role;
+	private UserRole role;
 }

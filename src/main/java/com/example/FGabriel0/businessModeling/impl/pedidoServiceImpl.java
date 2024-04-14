@@ -2,8 +2,8 @@ package com.example.FGabriel0.businessModeling.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.example.FGabriel0.businessModeling.dto.itemPedidoDTO;
-import com.example.FGabriel0.businessModeling.dto.pedidoDTO;
+import com.example.FGabriel0.businessModeling.controller.form.itemPedidoForm;
+import com.example.FGabriel0.businessModeling.controller.form.pedidoForm;
 import com.example.FGabriel0.businessModeling.entity.Pedido;
 import com.example.FGabriel0.businessModeling.entity.Produto;
 import com.example.FGabriel0.businessModeling.enums.statusPedido;
@@ -38,7 +38,7 @@ public class pedidoServiceImpl implements pedidoService {
 
 	@Override
 	@Transactional
-	public Pedido salvar(pedidoDTO dto) {
+	public Pedido salvar(pedidoForm dto) {
 		Integer idCliente = dto.getCliente();
 		Cliente cliente = clienterepository
 			.findById(idCliente)
@@ -58,7 +58,7 @@ public class pedidoServiceImpl implements pedidoService {
 		return pedido;
 	}
 	
-	private List<ItemPedido> salvarItens(Pedido pedido,List<itemPedidoDTO> itens) {
+	private List<ItemPedido> salvarItens(Pedido pedido,List<itemPedidoForm> itens) {
 		
 		if(itens.isEmpty()) {
 			throw new RegraNegocioException("Não é possivel realizar um pedido");

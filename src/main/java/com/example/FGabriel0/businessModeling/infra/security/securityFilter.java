@@ -1,16 +1,21 @@
-package com.example.FGabriel0.businessModeling.infra;
+package com.example.FGabriel0.businessModeling.infra.security;
 
 import java.io.IOException;
+import java.util.Collection;
 
+import org.h2.command.ddl.CreateUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.FGabriel0.businessModeling.repository.clienteRepository;
+import com.example.FGabriel0.businessModeling.repository.usuarioRepository;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,7 +29,7 @@ public class securityFilter extends OncePerRequestFilter {
 	private tokenService tokenservice;
 	
 	@Autowired
-	private clienteRepository clienteRepository;
+	private usuarioRepository repository;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -32,18 +37,20 @@ public class securityFilter extends OncePerRequestFilter {
 		
 		String token = recoverToken(request);
 		if(token != null) {
-			String subject = tokenservice.validateToken(token);
-			UserDetails user = clienteRepository.findByNome(subject);
 			
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+			String login = tokenservice.validateToken(token);
+			
+			UserDetails user = repository.findByLogin(login);
+					
+            var authentication = new UsernamePasswordAuthenticationToken(user,
+            			null, user.getAuthorities());
+            
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			
 		}
 		filterChain.doFilter(request, response);
 	}
-	
-	
-	
+
 	private String recoverToken(HttpServletRequest request) {
 		String authHeader = request.getHeader("Authorization");
 		
@@ -51,7 +58,7 @@ public class securityFilter extends OncePerRequestFilter {
 			return null;
 		}
 		
-		return authHeader.replace("Bearer ", " ");
+		return authHeader.replace("Bearer ", "");
 	}
 
 }

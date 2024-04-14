@@ -2,13 +2,13 @@ package com.example.FGabriel0.businessModeling.service;
 
 import java.util.Optional;
 
-import com.example.FGabriel0.businessModeling.dto.pedidoDTO;
+import com.example.FGabriel0.businessModeling.controller.form.pedidoForm;
 import com.example.FGabriel0.businessModeling.entity.Pedido;
 import com.example.FGabriel0.businessModeling.enums.statusPedido;
 
 public interface pedidoService {
 
-	Pedido salvar(pedidoDTO dto);
+	Pedido salvar(pedidoForm dto);
 	
 	Optional<Pedido> obterPedido(Integer id);
 	
